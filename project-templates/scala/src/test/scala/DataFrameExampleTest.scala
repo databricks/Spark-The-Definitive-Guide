@@ -7,7 +7,7 @@ class DataFrameExampleTest extends BaseSpec {
 
   import testImplicits._
 
-  "My UDF" should "work as expected" in {
+  "The UDF" should "work as expected" in {
     assert(DFUtils.pointlessUDF("something") == "something")
   }
 

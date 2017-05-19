@@ -12,6 +12,8 @@ abstract class BaseSpec extends FlatSpec with BeforeAndAfterEach with Matchers {
 
   override protected def beforeEach(): Unit = {
     super.beforeEach()
+
+
     spark = SparkSession
       .builder()
       .appName("testing")
@@ -21,13 +23,5 @@ abstract class BaseSpec extends FlatSpec with BeforeAndAfterEach with Matchers {
 
   }
 
-  override protected def afterEach(): Unit = {
-    try {
-      spark.stop()
-      spark = null
-    } finally {
-      super.afterEach()
-    }
-  }
 }
 
