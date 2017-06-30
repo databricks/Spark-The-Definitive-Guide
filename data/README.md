@@ -1,13 +1,9 @@
+# Datasets
 
 This folder contains all of the datasets used in The Definitive Guide.
 
-# Instructions for Download
 
-TODO: Instructions
-
-# Datasets
-
-
+The datasets are as follow.
 
 ## Flight Data
 
