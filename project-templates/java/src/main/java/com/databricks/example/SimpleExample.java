@@ -1,4 +1,4 @@
-package main.example;
+package com.databricks.example;
 
 import org.apache.spark.sql.SparkSession;
 
@@ -12,7 +12,7 @@ public class SimpleExample {
                 .builder()
                 .getOrCreate();
 
-        spark.range(1, 2000).count();
+        System.out.println(spark.range(1, 2000).count());
 
     }
 }
