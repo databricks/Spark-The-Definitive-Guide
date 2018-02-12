@@ -5,7 +5,7 @@ This is the central repository for all materials related to [Spark: The Definiti
 
 *This repository is currently a work in progress and new material will be added over time.*
 
-![Spark: The Definitive Guide](http://akamaicovers.oreilly.com/images/0636920034957/rc_lrg.jpg)
+![Spark: The Definitive Guide](https://images-na.ssl-images-amazon.com/images/I/51z7TzI-Y3L._SX379_BO1,204,203,200_.jpg)
 
 # Instructions for how to run this code
 
