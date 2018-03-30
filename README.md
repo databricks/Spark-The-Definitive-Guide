@@ -21,7 +21,7 @@ To run this on your local machine either put all data in the "data" folder to `/
 
 The entire book was written in Databricks so all the code will run there just fine in Databricks Runtime 3.1 or later.
 
-Rather than having to upload the data, you'll simply be able to use `"/databricks-datasets/"` as the base path for the data. *TODO: this is still be uploaded, expect it in the coming weeks*.
+Rather than having to upload the data, you'll simply be able to use `"/databricks-datasets/definitive-guide/data/"` as the base path for the data.
 
 You can then run any of the notebooks in `code` folder inside of Databricks by simply importing them and running them.
 
