@@ -14,6 +14,10 @@ flightData2015 = spark\
   .option("header", "true")\
   .csv("/data/flight-data/csv/2015-summary.csv")
 
+# COMMAND ----------
+
+flightData2015.createOrReplaceTempView("flight_data_2015")
+
 
 # COMMAND ----------
 
@@ -76,4 +80,3 @@ flightData2015\
 
 
 # COMMAND ----------
-
