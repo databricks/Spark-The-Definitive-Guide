@@ -64,7 +64,7 @@ motifs.selectExpr("*",
   .where("a.id != b.id").where("b.id != c.id")\
   .where("abStart < bcStart").where("bcStart < caStart")\
   .orderBy(expr("cast(caStart as long) - cast(abStart as long)"))\
-  .selectExpr("a.id", "b.id", "c.id", "ab.`Start Date`", "ca.`End Date`")
+  .selectExpr("a.id", "b.id", "c.id", "ab.`Start Date`", "ca.`End Date`")\
   .limit(1).show(1, False)
 
 
