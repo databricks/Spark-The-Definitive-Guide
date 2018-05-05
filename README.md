@@ -18,6 +18,11 @@ To run the example on your local machine, either pull all data in the `data` sub
 
 ## Run on Databricks
 
+To run these modules on Databricks, you're going to need to do two things.
+
+1. Sign up for an account. You can do that [here](https://databricks.com/try-databricks).
+2. Import individual Notebooks to run on the platform
+
 Databricks is a zero-management cloud platform that provides:
 
 - Fully managed Spark clusters
@@ -25,8 +30,21 @@ Databricks is a zero-management cloud platform that provides:
 - A production pipeline scheduler
 - A platform for powering your favorite Spark-based applications
 
-All the examples run on Databricks Runtime 3.1 and above. To get a free Databricks account, go to [Try Databricks](https://databricks.com/try-databricks).
+### Instructions for importing
 
-On a Databricks cluster, the data required to run the examples is available in `/databricks-datasets/definitive-guide/data`.
+1. Navigate to the notebook you would like to import
 
-You can run a notebook in the `code` folder in Databricks after you import it, update the path to the data file to `/databricks-datasets/definitive-guide/data`, and attach it to a cluster. For details, see [Notebooks](https://docs.databricks.com/user-guide/notebooks/index.html).
+For instance, you might go to [this page](https://github.com/databricks/Spark-The-Definitive-Guide/blob/master/code/A_Gentle_Introduction_to_Spark-Chapter_3_A_Tour_of_Sparks_Toolset.py). Once you do that, you're going to need to navigate to the **RAW** version of the file and save that to your Desktop. You can do that by clicking the **Raw** button. *Alternatively, you could just clone the entire repository to your local desktop and navigate to the file on your computer*.
+
+2. Upload that to Databricks
+
+Read [the instructions](https://docs.databricks.com/user-guide/notebooks/index.html#import-a-notebook) here. Simply open the Databricks workspace and go to import in a given directory. From there, navigate to the file on your computer to upload it. *Unfortunately due to a recent security upgrade, notebooks cannot be imported from external URLs. Therefore you must upload it from your computer*.
+
+3. You're almost ready to go!
+
+Now you just need to simply run the notebooks! All the examples run on Databricks Runtime 3.1 and above so just be sure to create a cluster with a version equal to or greater than that. Once you've created your cluster, attach the notebook.
+
+4. Replacing the data path in each notebook
+
+Rather than you having to upload all of the data yourself, you simply have to change the path in each chapter from `/data` to `/databricks-datasets/definitive-guide/data`. Once you've done that, all examples should run without issue. You can use find and replace to do this very efficiently.
+
