@@ -19,6 +19,11 @@
             <version>2.1.0</version>
         </dependency>
         <dependency>
+			<groupId>org.apache.spark</groupId>
+			<artifactId>spark-mllib_2.11</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+        <dependency>
             <groupId>graphframes</groupId>
             <artifactId>graphframes</artifactId>
             <version>0.4.0-spark2.1-s_2.11</version>
@@ -33,6 +38,14 @@
     </repositories>
     <build>
         <plugins>
+        	<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
             <plugin>
                 <!-- Build an executable JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
