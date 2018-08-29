@@ -1,4 +1,5 @@
 // in Scala
+import spark.implicits._
 case class Flight(DEST_COUNTRY_NAME: String,
                   ORIGIN_COUNTRY_NAME: String,
                   count: BigInt)
