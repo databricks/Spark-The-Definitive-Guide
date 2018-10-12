@@ -1,50 +1,66 @@
-# Spark: The Definitive Guide
+# 스파크 완벽 가이드: 1판
 
-This is the central repository for all materials related to [Spark: The Definitive Guide](http://shop.oreilly.com/product/0636920034957.do) by Bill Chambers and Matei Zaharia. 
+이 저장소는 한빛출판사에서 출간한 한국어판 "스파크 완벽 가이드"에서 참조하는 각종 소스 코드와 예제 데이터를 담고 있습니다. 원서인 [Spark: The Definitive Guide](http://shop.oreilly.com/product/0636920034957.do)의 저자는 '빌 챔버스'와 '마테이 자하리아'입니다. 원서의 코드 저장소는 [여기](https://github.com/databricks/Spark-The-Definitive-Guide)를 참조하세요.  
 
-*This repository is currently a work in progress and new material will be added over time.*
+이 저장소를 참조하실 때 아래 내용에 유의해주세요.
+- 원서의 공식 코드 저장소와 마찬가지로 번역서의 내용은 독자의 의견을 반영하면서 변경될 수 있습니다.
+- 원서의 코드를 실행하면서 정상동작하지 않는 부분이나, 내용상 변화가 필요한 코드 영역은 원서와 일부 다를 수 있습니다. 하지만 본질적인 내용이 변경되지는 않았습니다.
 
-![Spark: The Definitive Guide](https://images-na.ssl-images-amazon.com/images/I/51z7TzI-Y3L._SX379_BO1,204,203,200_.jpg)
+# 책 표지
 
-# Code from the book
+![스파크 완벽 가이드 1판](https://images-na.ssl-images-amazon.com/images/I/51z7TzI-Y3L._SX379_BO1,204,203,200_.jpg)
 
-You can find the code from the book in the `code` subfolder where it is broken down by language and chapter.
+# 역자 정보
+## 우성한(panelion@gmail.com)
+우성한 책임은 kt NexR R&D 2팀 소속 엔지니어로 스파크 기반의 실시간 처리 솔루션인 린 스트림을 개발하고 있습니다. 스파크, 카프카, 하둡등 다양한 빅데이터 컴포넌트를 활용해 솔루션을 기획하고 아직은 생소한 실시간 처리 분야를 다양한 기업과 공공부분에 알리는 업무를 수행하고 있습니다. 또한, KT의 빅데이터 시스템을 최초로 구축하는데 참여했으며 빅데이터 분야의 다양한 오픈소스를 활용해 kt NexR의 빅데이터 배치 처리 솔루션인 NDAP을 개발했습니다. 지금은 빅데이터 아키텍처 설계부터 Front-end/Back-end 개발까지 수행하는 full stack 엔지니어로 Lean Stream을 개발하고 있습니다.
 
-# How to run the code
+## 이영호(diesel.yh.lee@gmail.com)
+이영호 팀장은 kt NexR의 R&D 2팀 소속 엔지니어로 스파크 기반의 실시간 처리 솔루션인 린 스트림 개발 팀을 이끌고 있습니다. 스파크 기반의 솔루션의 기획과 PoC를 수행하고 훌륭한 팀원들과 함께 개발해 나가고 있습니다. 이영호 팀장은 경찰청, 중소기업청등 공공분야의 다양한 업무시스템 구축과 하둡 기반의 빅데이터 솔루션 업체인 멤브로스 운영 경험을 가지고 있습니다. kt NexR 입사 후 통신사 데이터를 실시간으로 처리하는 다수의 프로젝트를 스파크로 구현했으며, 지금은 행복한 개발자가 머무는 팀을 만들기 위해 노력하고 있습니다.
 
-## Run on your local machine
+## 강재원(jwon.kang3703@gmail.com)
+강재원 팀장은 kt NexR DataScience팀 소속 데이터 사이언티스트로서 빅데이터 플랫폼을 기반으로 다양한 분석 프로젝트를 수행하고 있습니다. 또한, 최근에는 하둡 기술과 연계하여 R, 파이썬, 스파크 등과 같은 오픈소스를 활용한 최적의 분석 방법론 및 아키텍처를 연구하고 있습니다. 강재원 팀장은 SAS, SPSS등 상용 솔루션 기반의 분석 컨설턴트로 활동하면서 통신, 제조, 금융, 서비스 등 다양한 도메인의 분석시스템을 구축한 경험이 있으며, 2013년 kt NexR 합류 후 국내 최초 금융권 빅데이터 분석 프로젝트를 성공적으로 수행하면서 지금까지 다양한 오픈소스 기반의 분석 프로젝트를 수행하고 있습니다. 데이터 분석을 통한 기업의 성장을 위해 도메인 특성에 따른 최적의 분석 방법론을 전파하려고 노력하고 있습니다.
 
-To run the example on your local machine, either pull all data in the `data` subfolder to `/data` on your computer or specify the path to that particular dataset on your local machine.
+# 책에서 사용한 코드
 
-## Run on Databricks
+이 저장소의 `code` 폴더에는 책을 구성하는 각 장의 예제가 언어별 파일로 정리되어 있습니다.
 
-To run these modules on Databricks, you're going to need to do two things.
+# 코드 실행하기
 
-1. Sign up for an account. You can do that [here](https://databricks.com/try-databricks).
-2. Import individual Notebooks to run on the platform
+## 로컬 환경에서 실행하기
 
-Databricks is a zero-management cloud platform that provides:
+로컬 환경에서 예제를 실행하려면, `data` 폴더에서 로컬 장비의 `/data` 폴더나 즐겨 사용하는 경로로 예제 데이터를 옮겨야 합니다.
 
-- Fully managed Spark clusters
-- An interactive workspace for exploration and visualization
-- A production pipeline scheduler
-- A platform for powering your favorite Spark-based applications
+## 데이터브릭스 클라우드에서 실행하기
 
-### Instructions for importing
+데이터브릭스 환경에서 예제를 실행하려면 두 가지 단계를 거쳐야합니다.
 
-1. Navigate to the notebook you would like to import
+1. [데이터브릭스 사이트](https://databricks.com/try-databricks)에 가입합니다.
+2. 실행을 위해 개별 노트북 파일을 임포트합니다.
 
-For instance, you might go to [this page](https://github.com/databricks/Spark-The-Definitive-Guide/blob/master/code/A_Gentle_Introduction_to_Spark-Chapter_3_A_Tour_of_Sparks_Toolset.py). Once you do that, you're going to need to navigate to the **RAW** version of the file and save that to your Desktop. You can do that by clicking the **Raw** button. *Alternatively, you could just clone the entire repository to your local desktop and navigate to the file on your computer*.
+데이터브릭스는 관리형 클라우드이므로 다음과 같은 기능을 지원합니다.
+- 관리형 스파크 클러스터 환경
+- 대화형 데이터 탐색 및 시각화 기능
+- 운영용 파이프라인 스케줄러
+- 선호하는 스파크 기반 애플리케이션을 위한 플랫폼
 
-2. Upload that to Databricks
+### 노트북 임포트 과정
 
-Read [the instructions](https://docs.databricks.com/user-guide/notebooks/index.html#import-a-notebook) here. Simply open the Databricks workspace and go to import in a given directory. From there, navigate to the file on your computer to upload it. *Unfortunately due to a recent security upgrade, notebooks cannot be imported from external URLs. Therefore you must upload it from your computer*.
+1. **임포트하려는 노트북 파일을 결정합니다.**
+예를들어, [파이썬 버전의 3장 예제](https://github.com/databricks/Spark-The-Definitive-Guide/blob/master/code/A_Gentle_Introduction_to_Spark-Chapter_3_A_Tour_of_Sparks_Toolset.py)에 접속합니다. 그리고 파일보기 방식중 **RAW** 형태로 보기 버튼을 선택하여 데스크탑에 저장합니다. 다른 방법으로 git 명령을 이용해 이 코드 저장소를 모두 로컬로 복제할 수도 있습니다.  
 
-3. You're almost ready to go!
+2. **데이터브릭스 환경에 파일을 업로드합니다**
+노트북 임포트 하는 방법을 소개하는 [이 URL](https://docs.databricks.com/user-guide/notebooks/index.html#import-a-notebook)을 숙지합니다. 데이터브릭스 워크스페이스를 열고 임포트 대상 파일 경로로 이동합니다. 거기서 업로드할 파일을 선택합니다. **아쉽게도, 최근에 강화된 보안 정책에 따라 외부 URL에서 노트북 파일을 임포트 할 수 없습니다. 따라서, 반드시 로컬에서 파일을 업로드해야 합니다.**
 
-Now you just need to simply run the notebooks! All the examples run on Databricks Runtime 3.1 and above so just be sure to create a cluster with a version equal to or greater than that. Once you've created your cluster, attach the notebook.
+3. **준비가 거의 끝났습니다.**
+이제 노트북을 실행하기만 하면 됩니다. 모든 예제는 데이터브릭스 런타임 3.1 버전 이상에서 실행할 수 있습니다. 따라서 클러스터를 생성할 때 버전을 3.1이상으로 지정해야 합니다. 클러스터를 생성하고 나면 노트북에 연결할 수 있습니다.   
 
-4. Replacing the data path in each notebook
+4. **각 노트북의 예제 데이터 경로를 변경합니다.**
+모든 예제 데이터를 직접 업로드하지 마시고 각 장의 예제에 등장하는 `/data`를 `/databricks-datasets/definitive-guide/data`로 변경해 사용하는 것이 좋습니다. 경로를 변경하고 나면 모든 예제가 큰 문제 없이 실행됩니다. "find"와 "replace" 기능을 이용하면 이 과정을 단순하게 처리할 수 있습니다.
 
-Rather than you having to upload all of the data yourself, you simply have to change the path in each chapter from `/data` to `/databricks-datasets/definitive-guide/data`. Once you've done that, all examples should run without issue. You can use find and replace to do this very efficiently.
+## docker 이미지에서 실행하기
 
+원서에서는 제공하지 않지만, 한글판 스파크 완벽 가이드에서는 추가적으로 [도커 이미지](https://dockr.ly/2OYIbTK)를 통해 로컬 환경을 구성하는 방법을 설명합니다. 단지 몇줄의 명령만으로 모든 환경이 준비된 제플린 노트북 화면을 로컬에 설치할 수 있습니다. 도커 이미지에 포함된 예제 코드는 필요에 따라 일부 주석으로 처리되어 있으니 필요시 주석을 해제하고 활용하시기 바랍니다. 
+
+#  문의사항
+
+책에 대한 문의 사항은 이 저장소의 issue 탭에 문의해 주시기 바랍니다.
