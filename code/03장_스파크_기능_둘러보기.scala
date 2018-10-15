@@ -78,7 +78,7 @@ val purchaseByCustomerPerHour = streamingDataFrame
     "(UnitPrice * Quantity) as total_cost",
     "InvoiceDate")
   .groupBy(
-    $"CustomerId", window($"InvoiceDate", "1 day"))
+    col("CustomerId"), window(col("InvoiceDate"), "1 day"))
   .sum("total_cost")
 
 
