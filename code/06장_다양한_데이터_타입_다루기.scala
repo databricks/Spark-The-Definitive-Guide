@@ -474,8 +474,8 @@ jsonDF.select(
 // COMMAND ----------
 
 jsonDF.selectExpr(
-  "json_tuple(jsonString, '$.myJSONKey.myJSONValue[1]') as column").show(2)
-
+  "get_json_object(jsonString, '$.myJSONKey.myJSONValue[1]') as column",
+  "json_tuple(jsonString, 'myJSONKey')").show(2)
 
 // COMMAND ----------
 
