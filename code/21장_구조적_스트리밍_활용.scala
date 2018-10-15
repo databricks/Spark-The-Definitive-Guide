@@ -1,18 +1,18 @@
-// in Scala
+// 스칼라 버전
 val static = spark.read.json("/data/activity-data/")
 val dataSchema = static.schema
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val streaming = spark.readStream.schema(dataSchema)
   .option("maxFilesPerTrigger", 1).json("/data/activity-data")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val activityCounts = streaming.groupBy("gt").count()
 
 
@@ -23,7 +23,7 @@ spark.conf.set("spark.sql.shuffle.partitions", 5)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val activityQuery = activityCounts.writeStream.queryName("activity_counts")
   .format("memory").outputMode("complete")
   .start()
@@ -41,7 +41,7 @@ spark.streams.active
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 for( i <- 1 to 5 ) {
     spark.sql("SELECT * FROM activity_counts").show()
     Thread.sleep(1000)
@@ -50,7 +50,7 @@ for( i <- 1 to 5 ) {
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.expr
 val simpleTransform = streaming.withColumn("stairs", expr("gt like '%stairs%'"))
   .where("stairs")
@@ -65,7 +65,7 @@ val simpleTransform = streaming.withColumn("stairs", expr("gt like '%stairs%'"))
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val deviceModelStats = streaming.cube("gt", "model").avg()
   .drop("avg(Arrival_time)")
   .drop("avg(Creation_Time)")
@@ -76,7 +76,7 @@ val deviceModelStats = streaming.cube("gt", "model").avg()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val historicalAgg = static.groupBy("gt", "model").avg()
 val deviceModelStats = streaming.drop("Arrival_Time", "Creation_Time", "Index")
   .cube("gt", "model").avg()
@@ -87,7 +87,7 @@ val deviceModelStats = streaming.drop("Arrival_Time", "Creation_Time", "Index")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 // Subscribe to 1 topic
 val ds1 = spark.readStream.format("kafka")
   .option("kafka.bootstrap.servers", "host1:port1,host2:port2")
@@ -107,7 +107,7 @@ val ds3 = spark.readStream.format("kafka")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 ds1.selectExpr("topic", "CAST(key AS STRING)", "CAST(value AS STRING)")
   .writeStream.format("kafka")
   .option("checkpointLocation", "/to/HDFS-compatible/dir")
@@ -139,7 +139,7 @@ datasetOfString.write.foreach(new ForeachWriter[String] {
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val socketDF = spark.readStream.format("socket")
   .option("host", "localhost").option("port", 9999).load()
 
@@ -151,13 +151,13 @@ activityCounts.format("console").write()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 activityCounts.writeStream.format("memory").queryName("my_device_table")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.streaming.Trigger
 
 activityCounts.writeStream.trigger(Trigger.ProcessingTime("100 seconds"))
@@ -166,7 +166,7 @@ activityCounts.writeStream.trigger(Trigger.ProcessingTime("100 seconds"))
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.streaming.Trigger
 
 activityCounts.writeStream.trigger(Trigger.Once())
@@ -175,7 +175,7 @@ activityCounts.writeStream.trigger(Trigger.Once())
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 case class Flight(DEST_COUNTRY_NAME: String, ORIGIN_COUNTRY_NAME: String,
   count: BigInt)
 val dataSchema = spark.read

@@ -1,4 +1,4 @@
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.SparkSession
 val spark = SparkSession.builder
   .master("mesos://HOST:5050")

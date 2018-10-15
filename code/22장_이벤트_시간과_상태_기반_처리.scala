@@ -1,4 +1,4 @@
-// in Scala
+// 스칼라 버전
 spark.conf.set("spark.sql.shuffle.partitions", 5)
 val static = spark.read.json("/data/activity-data")
 val streaming = spark
@@ -15,7 +15,7 @@ streaming.printSchema()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val withEventTime = streaming.selectExpr(
   "*",
   "cast(cast(Creation_Time as double)/1000000000 as timestamp) as event_time")
@@ -23,7 +23,7 @@ val withEventTime = streaming.selectExpr(
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{window, col}
 withEventTime.groupBy(window(col("event_time"), "10 minutes")).count()
   .writeStream
@@ -40,7 +40,7 @@ spark.sql("SELECT * FROM events_per_window").printSchema()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{window, col}
 withEventTime.groupBy(window(col("event_time"), "10 minutes"), "User").count()
   .writeStream
@@ -52,7 +52,7 @@ withEventTime.groupBy(window(col("event_time"), "10 minutes"), "User").count()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{window, col}
 withEventTime.groupBy(window(col("event_time"), "10 minutes", "5 minutes"))
   .count()
@@ -65,7 +65,7 @@ withEventTime.groupBy(window(col("event_time"), "10 minutes", "5 minutes"))
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{window, col}
 withEventTime
   .withWatermark("event_time", "5 hours")
@@ -80,7 +80,7 @@ withEventTime
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.expr
 
 withEventTime

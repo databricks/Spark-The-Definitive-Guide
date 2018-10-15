@@ -3,13 +3,13 @@ spark
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val myRange = spark.range(1000).toDF("number")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val divisBy2 = myRange.where("number % 2 = 0")
 
 
@@ -20,7 +20,7 @@ divisBy2.count()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val flightData2015 = spark
   .read
   .option("inferSchema", "true")
@@ -55,7 +55,7 @@ flightData2015.createOrReplaceTempView("flight_data_2015")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val sqlWay = spark.sql("""
 SELECT DEST_COUNTRY_NAME, count(1)
 FROM flight_data_2015
@@ -77,7 +77,7 @@ spark.sql("SELECT max(count) from flight_data_2015").take(1)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.max
 
 flightData2015.select(max("count")).take(1)
@@ -85,7 +85,7 @@ flightData2015.select(max("count")).take(1)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val maxSql = spark.sql("""
 SELECT DEST_COUNTRY_NAME, sum(count) as destination_total
 FROM flight_data_2015
@@ -99,7 +99,7 @@ maxSql.show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.desc
 
 flightData2015
@@ -113,7 +113,7 @@ flightData2015
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 flightData2015
   .groupBy("DEST_COUNTRY_NAME")
   .sum("count")

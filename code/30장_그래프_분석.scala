@@ -1,4 +1,4 @@
-// in Scala
+// 스칼라 버전
 val bikeStations = spark.read.option("header","true")
   .csv("/data/bike-data/201508_station_data.csv")
 val tripData = spark.read.option("header","true")
@@ -7,7 +7,7 @@ val tripData = spark.read.option("header","true")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val stationVertices = bikeStations.withColumnRenamed("name", "id").distinct()
 val tripEdges = tripData
   .withColumnRenamed("Start Station", "src")
@@ -16,7 +16,7 @@ val tripEdges = tripData
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.graphframes.GraphFrame
 val stationGraph = GraphFrame(stationVertices, tripEdges)
 stationGraph.cache()
@@ -24,7 +24,7 @@ stationGraph.cache()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 println(s"Total Number of Stations: ${stationGraph.vertices.count()}")
 println(s"Total Number of Trips in Graph: ${stationGraph.edges.count()}")
 println(s"Total Number of Trips in Original Data: ${tripData.count()}")
@@ -32,14 +32,14 @@ println(s"Total Number of Trips in Original Data: ${tripData.count()}")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.desc
 stationGraph.edges.groupBy("src", "dst").count().orderBy(desc("count")).show(10)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 stationGraph.edges
   .where("src = 'Townsend at 7th' OR dst = 'Townsend at 7th'")
   .groupBy("src", "dst").count()
@@ -49,7 +49,7 @@ stationGraph.edges
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val townAnd7thEdges = stationGraph.edges
   .where("src = 'Townsend at 7th' OR dst = 'Townsend at 7th'")
 val subgraph = GraphFrame(stationGraph.vertices, townAnd7thEdges)
@@ -57,13 +57,13 @@ val subgraph = GraphFrame(stationGraph.vertices, townAnd7thEdges)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val motifs = stationGraph.find("(a)-[ab]->(b); (b)-[bc]->(c); (c)-[ca]->(a)")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.expr
 motifs.selectExpr("*",
     "to_timestamp(ab.`Start Date`, 'MM/dd/yyyy HH:mm') as abStart",
@@ -79,7 +79,7 @@ motifs.selectExpr("*",
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.desc
 val ranks = stationGraph.pageRank.resetProbability(0.15).maxIter(10).run()
 ranks.vertices.orderBy(desc("pagerank")).select("id", "pagerank").show(10)
@@ -87,21 +87,21 @@ ranks.vertices.orderBy(desc("pagerank")).select("id", "pagerank").show(10)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val inDeg = stationGraph.inDegrees
 inDeg.orderBy(desc("inDegree")).show(5, false)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val outDeg = stationGraph.outDegrees
 outDeg.orderBy(desc("outDegree")).show(5, false)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val degreeRatio = inDeg.join(outDeg, Seq("id"))
   .selectExpr("id", "double(inDegree)/double(outDegree) as degreeRatio")
 degreeRatio.orderBy(desc("degreeRatio")).show(10, false)
@@ -110,33 +110,33 @@ degreeRatio.orderBy("degreeRatio").show(10, false)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 stationGraph.bfs.fromExpr("id = 'Townsend at 7th'")
   .toExpr("id = 'Spear at Folsom'").maxPathLength(2).run().show(10)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 spark.sparkContext.setCheckpointDir("/tmp/checkpoints")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val minGraph = GraphFrame(stationVertices, tripEdges.sample(false, 0.1))
 val cc = minGraph.connectedComponents.run()
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 cc.where("component != 0").show()
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val scc = minGraph.stronglyConnectedComponents.maxIter(3).run()
 
 

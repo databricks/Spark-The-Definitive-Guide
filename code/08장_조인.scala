@@ -1,4 +1,4 @@
-// in Scala
+// 스칼라 버전
 val person = Seq(
     (0, "Bill Chambers", 0, Seq(100)),
     (1, "Matei Zaharia", 1, Seq(500, 250, 100)),
@@ -25,13 +25,13 @@ sparkStatus.createOrReplaceTempView("sparkStatus")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val joinExpression = person.col("graduate_program") === graduateProgram.col("id")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val wrongJoinExpression = person.col("name") === graduateProgram.col("school")
 
 
@@ -42,7 +42,7 @@ person.join(graduateProgram, joinExpression).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 var joinType = "inner"
 
 
@@ -93,7 +93,7 @@ graduateProgram.join(person, joinExpression, joinType).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val gradProgram2 = graduateProgram.union(Seq(
     (0, "Masters", "Duplicated Row", "Duplicated School")).toDF())
 

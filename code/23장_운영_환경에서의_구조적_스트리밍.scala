@@ -1,4 +1,4 @@
-// in Scala
+// 스칼라 버전
 val static = spark.read.json("/data/activity-data")
 val streaming = spark
   .readStream

@@ -1,4 +1,4 @@
-// in Scala
+// 스칼라 버전
 val df = spark.read.format("csv")
   .option("header", "true")
   .option("inferSchema", "true")
@@ -15,56 +15,56 @@ df.count() == 541909
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.count
 df.select(count("StockCode")).show() // 541909
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.countDistinct
 df.select(countDistinct("StockCode")).show() // 4070
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.approx_count_distinct
 df.select(approx_count_distinct("StockCode", 0.1)).show() // 3364
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{first, last}
 df.select(first("StockCode"), last("StockCode")).show()
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{min, max}
 df.select(min("Quantity"), max("Quantity")).show()
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.sum
 df.select(sum("Quantity")).show() // 5176450
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.sumDistinct
 df.select(sumDistinct("Quantity")).show() // 29310
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{sum, count, avg, expr}
 
 df.select(
@@ -80,7 +80,7 @@ df.select(
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{var_pop, stddev_pop}
 import org.apache.spark.sql.functions.{var_samp, stddev_samp}
 df.select(var_pop("Quantity"), var_samp("Quantity"),
@@ -95,7 +95,7 @@ df.select(skewness("Quantity"), kurtosis("Quantity")).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{corr, covar_pop, covar_samp}
 df.select(corr("InvoiceNo", "Quantity"), covar_samp("InvoiceNo", "Quantity"),
     covar_pop("InvoiceNo", "Quantity")).show()
@@ -103,7 +103,7 @@ df.select(corr("InvoiceNo", "Quantity"), covar_samp("InvoiceNo", "Quantity"),
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{collect_set, collect_list}
 df.agg(collect_set("Country"), collect_list("Country")).show()
 
@@ -115,7 +115,7 @@ df.groupBy("InvoiceNo", "CustomerId").count().show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.count
 
 df.groupBy("InvoiceNo").agg(
@@ -125,13 +125,13 @@ df.groupBy("InvoiceNo").agg(
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.groupBy("InvoiceNo").agg("Quantity"->"avg", "Quantity"->"stddev_pop").show()
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{col, to_date}
 val dfWithDate = df.withColumn("date", to_date(col("InvoiceDate"),
   "MM/d/yyyy H:mm"))
@@ -140,7 +140,7 @@ dfWithDate.createOrReplaceTempView("dfWithDate")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.expressions.Window
 import org.apache.spark.sql.functions.col
 val windowSpec = Window
@@ -157,7 +157,7 @@ val maxPurchaseQuantity = max(col("Quantity")).over(windowSpec)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{dense_rank, rank}
 val purchaseDenseRank = dense_rank().over(windowSpec)
 val purchaseRank = rank().over(windowSpec)
@@ -165,7 +165,7 @@ val purchaseRank = rank().over(windowSpec)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.col
 
 dfWithDate.where("CustomerId IS NOT NULL").orderBy("CustomerId")
@@ -180,7 +180,7 @@ dfWithDate.where("CustomerId IS NOT NULL").orderBy("CustomerId")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val dfNoNull = dfWithDate.drop()
 dfNoNull.createOrReplaceTempView("dfNoNull")
 
@@ -205,14 +205,14 @@ rolledUpDF.where("Date IS NULL").show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 dfNoNull.cube("Date", "Country").agg(sum(col("Quantity")))
   .select("Date", "Country", "sum(Quantity)").orderBy("Date").show()
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{grouping_id, sum, expr}
 
 dfNoNull.cube("customerId", "stockCode").agg(grouping_id(), sum("Quantity"))
@@ -222,7 +222,7 @@ dfNoNull.cube("customerId", "stockCode").agg(grouping_id(), sum("Quantity"))
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val pivoted = dfWithDate.groupBy("date").pivot("Country").sum()
 
 
@@ -233,7 +233,7 @@ pivoted.where("date > '2011-12-05'").select("date" ,"`USA_sum(Quantity)`").show(
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.expressions.MutableAggregationBuffer
 import org.apache.spark.sql.expressions.UserDefinedAggregateFunction
 import org.apache.spark.sql.Row
@@ -263,7 +263,7 @@ class BoolAnd extends UserDefinedAggregateFunction {
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val ba = new BoolAnd
 spark.udf.register("booland", ba)
 import org.apache.spark.sql.functions._

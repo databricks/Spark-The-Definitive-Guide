@@ -1,4 +1,4 @@
-// in Scala
+// 스칼라 버전
 val df = spark.read.format("json")
   .load("/data/flight-data/json/2015-summary.json")
 
@@ -10,13 +10,13 @@ df.printSchema()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 spark.read.format("json").load("/data/flight-data/json/2015-summary.json").schema
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.types.{StructField, StructType, StringType, LongType}
 import org.apache.spark.sql.types.Metadata
 
@@ -33,7 +33,7 @@ val df = spark.read.format("json").schema(myManualSchema)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{col, column}
 col("someColumnName")
 column("someColumnName")
@@ -41,7 +41,7 @@ column("someColumnName")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 $"myColumn"
 'myColumn
 
@@ -58,7 +58,7 @@ df.col("count")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.expr
 expr("(((someCol + 5) * 200) - 6) < otherCol")
 
@@ -76,14 +76,14 @@ df.first()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.Row
 val myRow = Row("Hello", null, 1, false)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 myRow(0) // type Any
 myRow(0).asInstanceOf[String] // String
 myRow.getString(0) // String
@@ -92,7 +92,7 @@ myRow.getInt(2) // Int
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val df = spark.read.format("json")
   .load("/data/flight-data/json/2015-summary.json")
 df.createOrReplaceTempView("dfTable")
@@ -100,7 +100,7 @@ df.createOrReplaceTempView("dfTable")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.types.{StructField, StructType, StringType, LongType}
 
@@ -116,25 +116,25 @@ myDf.show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val myDF = Seq(("Hello", 2, 1L)).toDF("col1", "col2", "col3")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.select("DEST_COUNTRY_NAME").show(2)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.select("DEST_COUNTRY_NAME", "ORIGIN_COUNTRY_NAME").show(2)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{expr, col, column}
 df.select(
     df.col("DEST_COUNTRY_NAME"),
@@ -148,26 +148,26 @@ df.select(
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.select(expr("DEST_COUNTRY_NAME AS destination")).show(2)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.select(expr("DEST_COUNTRY_NAME as destination").alias("DEST_COUNTRY_NAME"))
   .show(2)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.selectExpr("DEST_COUNTRY_NAME as newColumnName", "DEST_COUNTRY_NAME").show(2)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.selectExpr(
     "*", // include all original columns
     "(DEST_COUNTRY_NAME = ORIGIN_COUNTRY_NAME) as withinCountry")
@@ -176,26 +176,26 @@ df.selectExpr(
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.selectExpr("avg(count)", "count(distinct(DEST_COUNTRY_NAME))").show(2)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.lit
 df.select(expr("*"), lit(1).as("One")).show(2)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.withColumn("numberOne", lit(1)).show(2)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.withColumn("withinCountry", expr("ORIGIN_COUNTRY_NAME == DEST_COUNTRY_NAME"))
   .show(2)
 
@@ -207,13 +207,13 @@ df.withColumn("Destination", expr("DEST_COUNTRY_NAME")).columns
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.withColumnRenamed("DEST_COUNTRY_NAME", "dest").columns
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.expr
 
 val dfWithLongColName = df.withColumn(
@@ -223,7 +223,7 @@ val dfWithLongColName = df.withColumn(
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 dfWithLongColName.selectExpr(
     "`This Long Column-Name`",
     "`This Long Column-Name` as `new col`")
@@ -237,7 +237,7 @@ dfWithLongColName.createOrReplaceTempView("dfTableLong")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 dfWithLongColName.select(col("This Long Column-Name")).columns
 
 
@@ -264,20 +264,20 @@ df.where("count < 2").show(2)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.where(col("count") < 2).where(col("ORIGIN_COUNTRY_NAME") =!= "Croatia")
   .show(2)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.select("ORIGIN_COUNTRY_NAME", "DEST_COUNTRY_NAME").distinct().count()
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.select("ORIGIN_COUNTRY_NAME").distinct().count()
 
 
@@ -291,14 +291,14 @@ df.sample(withReplacement, fraction, seed).count()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val dataFrames = df.randomSplit(Array(0.25, 0.75), seed)
 dataFrames(0).count() > dataFrames(1).count() // False
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.Row
 val schema = df.schema
 val newRows = Seq(
@@ -315,7 +315,7 @@ df.union(newDF)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.sort("count").show(5)
 df.orderBy("count", "DEST_COUNTRY_NAME").show(5)
 df.orderBy(col("count"), col("DEST_COUNTRY_NAME")).show(5)
@@ -323,7 +323,7 @@ df.orderBy(col("count"), col("DEST_COUNTRY_NAME")).show(5)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{desc, asc}
 df.orderBy(expr("count desc")).show(2)
 df.orderBy(desc("count"), asc("DEST_COUNTRY_NAME")).show(2)
@@ -331,56 +331,56 @@ df.orderBy(desc("count"), asc("DEST_COUNTRY_NAME")).show(2)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 spark.read.format("json").load("/data/flight-data/json/*-summary.json")
   .sortWithinPartitions("count")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.limit(5).show()
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.orderBy(expr("count desc")).limit(6).show()
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.rdd.getNumPartitions // 1
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.repartition(5)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.repartition(col("DEST_COUNTRY_NAME"))
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.repartition(5, col("DEST_COUNTRY_NAME"))
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 df.repartition(5, col("DEST_COUNTRY_NAME")).coalesce(2)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val collectDF = df.limit(10)
 collectDF.take(5) // take works with an Integer count
 collectDF.show() // this prints it out nicely

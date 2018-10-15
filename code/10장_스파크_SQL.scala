@@ -3,7 +3,7 @@ spark.sql("SELECT 1 + 1").show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 spark.read.json("/data/flight-data/json/2015-summary.json")
   .createOrReplaceTempView("some_sql_view") // DF => SQL
 

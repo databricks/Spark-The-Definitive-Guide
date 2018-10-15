@@ -1,4 +1,4 @@
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.VectorAssembler
 
 val va = new VectorAssembler()
@@ -18,7 +18,7 @@ sales.cache()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.clustering.KMeans
 val km = new KMeans().setK(5)
 println(km.explainParams())
@@ -27,7 +27,7 @@ val kmModel = km.fit(sales)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val summary = kmModel.summary
 summary.clusterSizes // number of points
 kmModel.computeCost(sales)
@@ -37,7 +37,7 @@ kmModel.clusterCenters.foreach(println)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.clustering.BisectingKMeans
 val bkm = new BisectingKMeans().setK(5).setMaxIter(5)
 println(bkm.explainParams())
@@ -46,7 +46,7 @@ val bkmModel = bkm.fit(sales)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val summary = bkmModel.summary
 summary.clusterSizes // number of points
 kmModel.computeCost(sales)
@@ -56,7 +56,7 @@ kmModel.clusterCenters.foreach(println)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.clustering.GaussianMixture
 val gmm = new GaussianMixture().setK(5)
 println(gmm.explainParams())
@@ -65,7 +65,7 @@ val model = gmm.fit(sales)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val summary = model.summary
 model.weights
 model.gaussiansDF.show()
@@ -76,7 +76,7 @@ summary.probability.show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.{Tokenizer, CountVectorizer}
 val tkn = new Tokenizer().setInputCol("Description").setOutputCol("DescOut")
 val tokenized = tkn.transform(sales.drop("features"))
@@ -93,7 +93,7 @@ val prepped = cvFitted.transform(tokenized)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.clustering.LDA
 val lda = new LDA().setK(10).setMaxIter(5)
 println(lda.explainParams())
@@ -102,7 +102,7 @@ val model = lda.fit(prepped)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 model.describeTopics(3).show()
 cvFitted.vocabulary
 

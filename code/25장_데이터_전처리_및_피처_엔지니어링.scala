@@ -1,4 +1,4 @@
-// in Scala
+// 스칼라 버전
 val sales = spark.read.format("csv")
   .option("header", "true")
   .option("inferSchema", "true")
@@ -18,7 +18,7 @@ sales.show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.Tokenizer
 val tkn = new Tokenizer().setInputCol("Description")
 tkn.transform(sales.select("Description")).show(false)
@@ -26,7 +26,7 @@ tkn.transform(sales.select("Description")).show(false)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.StandardScaler
 val ss = new StandardScaler().setInputCol("features")
 ss.fit(scaleDF).transform(scaleDF).show(false)
@@ -34,7 +34,7 @@ ss.fit(scaleDF).transform(scaleDF).show(false)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.RFormula
 val supervised = new RFormula()
   .setFormula("lab ~ . + color:value1 + color:value2")
@@ -43,7 +43,7 @@ supervised.fit(simpleDF).transform(simpleDF).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.SQLTransformer
 
 val basicTransformation = new SQLTransformer()
@@ -58,7 +58,7 @@ basicTransformation.transform(sales).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.VectorAssembler
 val va = new VectorAssembler().setInputCols(Array("int1", "int2", "int3"))
 va.transform(fakeIntDF).show()
@@ -66,13 +66,13 @@ va.transform(fakeIntDF).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val contDF = spark.range(20).selectExpr("cast(id as double)")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.Bucketizer
 val bucketBorders = Array(-1.0, 5.0, 10.0, 250.0, 600.0)
 val bucketer = new Bucketizer().setSplits(bucketBorders).setInputCol("id")
@@ -81,7 +81,7 @@ bucketer.transform(contDF).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.QuantileDiscretizer
 val bucketer = new QuantileDiscretizer().setNumBuckets(5).setInputCol("id")
 val fittedBucketer = bucketer.fit(contDF)
@@ -90,7 +90,7 @@ fittedBucketer.transform(contDF).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.StandardScaler
 val sScaler = new StandardScaler().setInputCol("features")
 sScaler.fit(scaleDF).transform(scaleDF).show()
@@ -98,7 +98,7 @@ sScaler.fit(scaleDF).transform(scaleDF).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.MinMaxScaler
 val minMax = new MinMaxScaler().setMin(5).setMax(10).setInputCol("features")
 val fittedminMax = minMax.fit(scaleDF)
@@ -107,7 +107,7 @@ fittedminMax.transform(scaleDF).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.MaxAbsScaler
 val maScaler = new MaxAbsScaler().setInputCol("features")
 val fittedmaScaler = maScaler.fit(scaleDF)
@@ -116,7 +116,7 @@ fittedmaScaler.transform(scaleDF).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.ElementwiseProduct
 import org.apache.spark.ml.linalg.Vectors
 val scaleUpVec = Vectors.dense(10.0, 15.0, 20.0)
@@ -128,7 +128,7 @@ scalingUp.transform(scaleDF).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.Normalizer
 val manhattanDistance = new Normalizer().setP(1).setInputCol("features")
 manhattanDistance.transform(scaleDF).show()
@@ -136,7 +136,7 @@ manhattanDistance.transform(scaleDF).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.StringIndexer
 val lblIndxr = new StringIndexer().setInputCol("lab").setOutputCol("labelInd")
 val idxRes = lblIndxr.fit(simpleDF).transform(simpleDF)
@@ -145,7 +145,7 @@ idxRes.show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val valIndexer = new StringIndexer()
   .setInputCol("value1")
   .setOutputCol("valueInd")
@@ -161,7 +161,7 @@ valIndexer.fit(simpleDF).setHandleInvalid("skip")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.IndexToString
 val labelReverse = new IndexToString().setInputCol("labelInd")
 labelReverse.transform(idxRes).show()
@@ -169,7 +169,7 @@ labelReverse.transform(idxRes).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.VectorIndexer
 import org.apache.spark.ml.linalg.Vectors
 val idxIn = spark.createDataFrame(Seq(
@@ -186,7 +186,7 @@ indxr.fit(idxIn).transform(idxIn).show
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.{StringIndexer, OneHotEncoder}
 val lblIndxr = new StringIndexer().setInputCol("color").setOutputCol("colorInd")
 val colorLab = lblIndxr.fit(simpleDF).transform(simpleDF.select("color"))
@@ -196,7 +196,7 @@ ohe.transform(colorLab).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.Tokenizer
 val tkn = new Tokenizer().setInputCol("Description").setOutputCol("DescOut")
 val tokenized = tkn.transform(sales.select("Description"))
@@ -205,7 +205,7 @@ tokenized.show(false)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.RegexTokenizer
 val rt = new RegexTokenizer()
   .setInputCol("Description")
@@ -217,7 +217,7 @@ rt.transform(sales.select("Description")).show(false)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.RegexTokenizer
 val rt = new RegexTokenizer()
   .setInputCol("Description")
@@ -230,7 +230,7 @@ rt.transform(sales.select("Description")).show(false)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.StopWordsRemover
 val englishStopWords = StopWordsRemover.loadDefaultStopWords("english")
 val stops = new StopWordsRemover()
@@ -241,7 +241,7 @@ stops.transform(tokenized).show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.NGram
 val unigram = new NGram().setInputCol("DescOut").setN(1)
 val bigram = new NGram().setInputCol("DescOut").setN(2)
@@ -251,7 +251,7 @@ bigram.transform(tokenized.select("DescOut")).show(false)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.CountVectorizer
 val cv = new CountVectorizer()
   .setInputCol("DescOut")
@@ -265,7 +265,7 @@ fittedCV.transform(tokenized).show(false)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val tfIdfIn = tokenized
   .where("array_contains(DescOut, 'red')")
   .select("DescOut")
@@ -275,7 +275,7 @@ tfIdfIn.show(false)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.{HashingTF, IDF}
 val tf = new HashingTF()
   .setInputCol("DescOut")
@@ -289,13 +289,13 @@ val idf = new IDF()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 idf.fit(tf.transform(tfIdfIn)).transform(tf.transform(tfIdfIn)).show(false)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.Word2Vec
 import org.apache.spark.ml.linalg.Vector
 import org.apache.spark.sql.Row
@@ -320,7 +320,7 @@ result.collect().foreach { case Row(text: Seq[_], features: Vector) =>
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.PCA
 val pca = new PCA().setInputCol("features").setK(2)
 pca.fit(scaleDF).transform(scaleDF).show(false)
@@ -328,7 +328,7 @@ pca.fit(scaleDF).transform(scaleDF).show(false)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.PolynomialExpansion
 val pe = new PolynomialExpansion().setInputCol("features").setDegree(2)
 pe.transform(scaleDF).show(false)
@@ -336,7 +336,7 @@ pe.transform(scaleDF).show(false)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.{ChiSqSelector, Tokenizer}
 val tkn = new Tokenizer().setInputCol("Description").setOutputCol("DescOut")
 val tokenized = tkn
@@ -353,14 +353,14 @@ chisq.fit(prechi).transform(prechi)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val fittedPCA = pca.fit(scaleDF)
 fittedPCA.write.overwrite().save("/tmp/fittedPCA")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.PCAModel
 val loadedPCA = PCAModel.load("/tmp/fittedPCA")
 loadedPCA.transform(scaleDF).show()

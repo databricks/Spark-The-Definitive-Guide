@@ -7,7 +7,7 @@ val spark = SparkSession.builder().appName("Databricks Spark Example")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.SparkContext
 val sc = SparkContext.getOrCreate()
 

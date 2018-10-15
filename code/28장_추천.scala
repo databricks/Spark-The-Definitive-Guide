@@ -1,4 +1,4 @@
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.recommendation.ALS
 val ratings = spark.read.textFile("/data/sample_movielens_ratings.txt")
   .selectExpr("split(value , '::') as col")
@@ -21,7 +21,7 @@ val predictions = alsModel.transform(test)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 alsModel.recommendForAllUsers(10)
   .selectExpr("userId", "explode(recommendations)").show()
 alsModel.recommendForAllItems(10)
@@ -30,7 +30,7 @@ alsModel.recommendForAllItems(10)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.evaluation.RegressionEvaluator
 val evaluator = new RegressionEvaluator()
   .setMetricName("rmse")
@@ -42,7 +42,7 @@ println(s"Root-mean-square error = $rmse")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.mllib.evaluation.{
   RankingMetrics,
   RegressionMetrics}
@@ -53,7 +53,7 @@ val metrics = new RegressionMetrics(regComparison)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.mllib.evaluation.{RankingMetrics, RegressionMetrics}
 import org.apache.spark.sql.functions.{col, expr}
 val perUserActual = predictions
@@ -64,7 +64,7 @@ val perUserActual = predictions
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val perUserPredictions = predictions
   .orderBy(col("userId"), col("prediction").desc)
   .groupBy("userId")
@@ -73,7 +73,7 @@ val perUserPredictions = predictions
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val perUserActualvPred = perUserActual.join(perUserPredictions, Seq("userId"))
   .map(row => (
     row(1).asInstanceOf[Seq[Integer]].toArray,
@@ -84,7 +84,7 @@ val ranks = new RankingMetrics(perUserActualvPred.rdd)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 ranks.meanAveragePrecision
 ranks.precisionAt(5)
 

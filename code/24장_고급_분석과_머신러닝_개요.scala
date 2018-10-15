@@ -1,4 +1,4 @@
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.linalg.Vectors
 val denseVec = Vectors.dense(1.0, 2.0, 3.0)
 val size = 3
@@ -11,7 +11,7 @@ denseVec.toSparse
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 var df = spark.read.json("/data/simple-ml")
 df.orderBy("value2").show()
 
@@ -24,7 +24,7 @@ spark.read.format("libsvm").load(
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.RFormula
 val supervised = new RFormula()
   .setFormula("lab ~ . + color:value1 + color:value2")
@@ -32,7 +32,7 @@ val supervised = new RFormula()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val fittedRF = supervised.fit(df)
 val preparedDF = fittedRF.transform(df)
 preparedDF.show()
@@ -40,26 +40,26 @@ preparedDF.show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val Array(train, test) = preparedDF.randomSplit(Array(0.7, 0.3))
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.classification.LogisticRegression
 val lr = new LogisticRegression().setLabelCol("label").setFeaturesCol("features")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 println(lr.explainParams())
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val fittedLR = lr.fit(train)
 
 
@@ -70,20 +70,20 @@ fittedLR.transform(train).select("label", "prediction").show()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val Array(train, test) = df.randomSplit(Array(0.7, 0.3))
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val rForm = new RFormula()
 val lr = new LogisticRegression().setLabelCol("label").setFeaturesCol("features")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.Pipeline
 val stages = Array(rForm, lr)
 val pipeline = new Pipeline().setStages(stages)
@@ -91,7 +91,7 @@ val pipeline = new Pipeline().setStages(stages)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.tuning.ParamGridBuilder
 val params = new ParamGridBuilder()
   .addGrid(rForm.formula, Array(
@@ -104,7 +104,7 @@ val params = new ParamGridBuilder()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.evaluation.BinaryClassificationEvaluator
 val evaluator = new BinaryClassificationEvaluator()
   .setMetricName("areaUnderROC")
@@ -114,7 +114,7 @@ val evaluator = new BinaryClassificationEvaluator()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.tuning.TrainValidationSplit
 val tvs = new TrainValidationSplit()
   .setTrainRatio(0.75) // also the default.
@@ -125,7 +125,7 @@ val tvs = new TrainValidationSplit()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val tvsFitted = tvs.fit(train)
 
 
@@ -136,7 +136,7 @@ evaluator.evaluate(tvsFitted.transform(test)) // 0.9166666666666667
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.PipelineModel
 import org.apache.spark.ml.classification.LogisticRegressionModel
 val trainedPipeline = tvsFitted.bestModel.asInstanceOf[PipelineModel]
@@ -152,7 +152,7 @@ tvsFitted.write.overwrite().save("/tmp/modelLocation")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.tuning.TrainValidationSplitModel
 val model = TrainValidationSplitModel.load("/tmp/modelLocation")
 model.transform(test)

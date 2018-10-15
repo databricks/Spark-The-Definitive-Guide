@@ -1,10 +1,10 @@
-// in Scala
+// 스칼라 버전
 val df = spark.read.load("/data/regression")
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.regression.LinearRegression
 val lr = new LinearRegression().setMaxIter(10).setRegParam(0.3)\
   .setElasticNetParam(0.8)
@@ -14,7 +14,7 @@ val lrModel = lr.fit(df)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val summary = lrModel.summary
 summary.residuals.show()
 println(summary.objectiveHistory.toSeq.toDF.show())
@@ -24,7 +24,7 @@ println(summary.r2)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.regression.GeneralizedLinearRegression
 val glr = new GeneralizedLinearRegression()
   .setFamily("gaussian")
@@ -38,7 +38,7 @@ val glrModel = glr.fit(df)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.regression.DecisionTreeRegressor
 val dtr = new DecisionTreeRegressor()
 println(dtr.explainParams())
@@ -47,7 +47,7 @@ val dtrModel = dtr.fit(df)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.regression.RandomForestRegressor
 import org.apache.spark.ml.regression.GBTRegressor
 val rf = new RandomForestRegressor()
@@ -60,7 +60,7 @@ val gbtModel = gbt.fit(df)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.evaluation.RegressionEvaluator
 import org.apache.spark.ml.regression.GeneralizedLinearRegression
 import org.apache.spark.ml.Pipeline
@@ -85,7 +85,7 @@ val model = cv.fit(df)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.mllib.evaluation.RegressionMetrics
 val out = model.transform(df)
   .select("prediction", "label")

@@ -3,25 +3,25 @@ spark.sparkContext
 
 // COMMAND ----------
 
-// in Scala: converts a Dataset[Long] to RDD[Long]
+// 스칼라 버전: converts a Dataset[Long] to RDD[Long]
 spark.range(500).rdd
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 spark.range(10).toDF().rdd.map(rowObject => rowObject.getLong(0))
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 spark.range(10).rdd.toDF()
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val myCollection = "Spark The Definitive Guide : Big Data Processing Made Simple"
   .split(" ")
 val words = spark.sparkContext.parallelize(myCollection, 2)
@@ -29,7 +29,7 @@ val words = spark.sparkContext.parallelize(myCollection, 2)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 words.setName("myWords")
 words.name // myWords
 
@@ -51,7 +51,7 @@ words.distinct().count()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 def startsWithS(individual:String) = {
   individual.startsWith("S")
 }
@@ -59,49 +59,49 @@ def startsWithS(individual:String) = {
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 words.filter(word => startsWithS(word)).collect()
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val words2 = words.map(word => (word, word(0), word.startsWith("S")))
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 words2.filter(record => record._3).take(5)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 words.flatMap(word => word.toSeq).take(5)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 words.sortBy(word => word.length() * -1).take(2)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val fiftyFiftySplit = words.randomSplit(Array[Double](0.5, 0.5))
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 spark.sparkContext.parallelize(1 to 20).reduce(_ + _) // 210
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 def wordLengthReducer(leftWord:String, rightWord:String): String = {
   if (leftWord.length > rightWord.length)
     return leftWord
@@ -173,7 +173,7 @@ words.saveAsTextFile("file:/tmp/bookTitle")
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.hadoop.io.compress.BZip2Codec
 words.saveAsTextFile("file:/tmp/bookTitleCompressed", classOf[BZip2Codec])
 
@@ -190,7 +190,7 @@ words.cache()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 words.getStorageLevel
 
 
@@ -207,13 +207,13 @@ words.pipe("wc -l").collect()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 words.mapPartitions(part => Iterator[Int](1)).sum() // 2
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 def indexedFunc(partitionIndex:Int, withinPartIterator: Iterator[String]) = {
   withinPartIterator.toList.map(
     value => s"Partition: $partitionIndex => $value").iterator
@@ -237,7 +237,7 @@ words.foreachPartition { iter =>
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 spark.sparkContext.parallelize(Seq("Hello", "World"), 2).glom().collect()
 // Array(Array(Hello), Array(World))
 

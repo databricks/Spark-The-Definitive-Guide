@@ -1,4 +1,4 @@
-// in Scala
+// 스칼라 버전
 import spark.implicits._
 case class Flight(DEST_COUNTRY_NAME: String,
                   ORIGIN_COUNTRY_NAME: String,
@@ -10,7 +10,7 @@ val flights = flightsDF.as[Flight]
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 flights
   .filter(flight_row => flight_row.ORIGIN_COUNTRY_NAME != "Canada")
   .map(flight_row => flight_row)
@@ -24,7 +24,7 @@ flights
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val staticDataFrame = spark.read.format("csv")
   .option("header", "true")
   .option("inferSchema", "true")
@@ -36,7 +36,7 @@ val staticSchema = staticDataFrame.schema
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.{window, column, desc, col}
 staticDataFrame
   .selectExpr(
@@ -71,7 +71,7 @@ streamingDataFrame.isStreaming // returns true
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val purchaseByCustomerPerHour = streamingDataFrame
   .selectExpr(
     "CustomerId",
@@ -84,7 +84,7 @@ val purchaseByCustomerPerHour = streamingDataFrame
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 purchaseByCustomerPerHour.writeStream
     .format("memory") // memory = store in-memory table
     .queryName("customer_purchases") // the name of the in-memory table
@@ -94,7 +94,7 @@ purchaseByCustomerPerHour.writeStream
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 spark.sql("""
   SELECT *
   FROM customer_purchases
@@ -110,7 +110,7 @@ staticDataFrame.printSchema()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.sql.functions.date_format
 val preppedDataFrame = staticDataFrame
   .na.fill(0)
@@ -120,7 +120,7 @@ val preppedDataFrame = staticDataFrame
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val trainDataFrame = preppedDataFrame
   .where("InvoiceDate < '2011-07-01'")
 val testDataFrame = preppedDataFrame
@@ -135,7 +135,7 @@ testDataFrame.count()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.StringIndexer
 val indexer = new StringIndexer()
   .setInputCol("day_of_week")
@@ -144,7 +144,7 @@ val indexer = new StringIndexer()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.OneHotEncoder
 val encoder = new OneHotEncoder()
   .setInputCol("day_of_week_index")
@@ -153,7 +153,7 @@ val encoder = new OneHotEncoder()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.feature.VectorAssembler
 
 val vectorAssembler = new VectorAssembler()
@@ -163,7 +163,7 @@ val vectorAssembler = new VectorAssembler()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.Pipeline
 
 val transformationPipeline = new Pipeline()
@@ -172,13 +172,13 @@ val transformationPipeline = new Pipeline()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val fittedPipeline = transformationPipeline.fit(trainDataFrame)
 
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val transformedTraining = fittedPipeline.transform(trainDataFrame)
 
 
@@ -189,7 +189,7 @@ transformedTraining.cache()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 import org.apache.spark.ml.clustering.KMeans
 val kmeans = new KMeans()
   .setK(20)
@@ -198,7 +198,7 @@ val kmeans = new KMeans()
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val kmModel = kmeans.fit(transformedTraining)
 
 
@@ -209,7 +209,7 @@ kmModel.computeCost(transformedTraining)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 val transformedTest = fittedPipeline.transform(testDataFrame)
 
 
@@ -220,7 +220,7 @@ kmModel.computeCost(transformedTest)
 
 // COMMAND ----------
 
-// in Scala
+// 스칼라 버전
 spark.sparkContext.parallelize(Seq(1, 2, 3)).toDF()
 
 
