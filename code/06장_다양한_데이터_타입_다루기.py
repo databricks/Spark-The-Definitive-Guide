@@ -310,13 +310,13 @@ df.select(create_map(col("Description"), col("InvoiceNo")).alias("complex_map"))
 
 # COMMAND ----------
 
-df.select(map(col("Description"), col("InvoiceNo")).alias("complex_map"))\
+df.select(create_map(col("Description"), col("InvoiceNo")).alias("complex_map"))\
   .selectExpr("complex_map['WHITE METAL LANTERN']").show(2)
 
 
 # COMMAND ----------
 
-df.select(map(col("Description"), col("InvoiceNo")).alias("complex_map"))\
+df.select(create_map(col("Description"), col("InvoiceNo")).alias("complex_map"))\
   .selectExpr("explode(complex_map)").show(2)
 
 
@@ -331,7 +331,7 @@ jsonDF = spark.range(1).selectExpr("""
 from pyspark.sql.functions import get_json_object, json_tuple
 
 jsonDF.select(
-    get_json_object(col("jsonString"), "$.myJSONKey.myJSONValue[1]") as "column",
+    get_json_object(col("jsonString"), "$.myJSONKey.myJSONValue[1]").alias("column"),
     json_tuple(col("jsonString"), "myJSONKey")).show(2)
 
 
