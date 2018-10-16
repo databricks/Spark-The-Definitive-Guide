@@ -42,7 +42,7 @@ spark.read.format("orc").load("/data/flight-data/orc/2010-summary.orc").show(5)
 
 # COMMAND ----------
 
-csvFile.write.format("orc").mode("overwrite").save("/tmp/my-json-file.orc")
+csvFile.write.format("orc").mode("overwrite").save("/tmp/my-orc-file.orc")
 
 
 # COMMAND ----------

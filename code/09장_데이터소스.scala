@@ -47,6 +47,7 @@ spark.read.format("csv")
 // COMMAND ----------
 
 // 스칼라 버전
+// 데이터 타입이 맞지 않기 때문에 오류가 발생함.
 val myManualSchema = new StructType(Array(
                      new StructField("DEST_COUNTRY_NAME", LongType, true),
                      new StructField("ORIGIN_COUNTRY_NAME", LongType, true),
@@ -126,7 +127,7 @@ spark.read.format("orc").load("/data/flight-data/orc/2010-summary.orc").show(5)
 // COMMAND ----------
 
 // 스칼라 버전
-csvFile.write.format("orc").mode("overwrite").save("/tmp/my-json-file.orc")
+csvFile.write.format("orc").mode("overwrite").save("/tmp/my-orc-file.orc")
 
 
 // COMMAND ----------
