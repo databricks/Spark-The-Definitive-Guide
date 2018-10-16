@@ -216,7 +216,7 @@ dfNoNull.cube("Date", "Country").agg(sum(col("Quantity")))
 import org.apache.spark.sql.functions.{grouping_id, sum, expr}
 
 dfNoNull.cube("customerId", "stockCode").agg(grouping_id(), sum("Quantity"))
-.orderBy(expr("grouping_id()").desc)
+.orderBy(col("grouping_id()").desc)
 .show()
 
 
