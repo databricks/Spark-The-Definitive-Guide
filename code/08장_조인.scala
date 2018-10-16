@@ -148,6 +148,7 @@ person.join(gradProgramDupe, joinExpr).show()
 
 // COMMAND ----------
 
+// 중복된 "graduate_program" 컬럼으로 인해 오류 발생
 person.join(gradProgramDupe, joinExpr).select("graduate_program").show()
 
 
