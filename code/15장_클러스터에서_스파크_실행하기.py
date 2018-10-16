@@ -20,3 +20,5 @@ step4.collect() # 2500000000000
 
 # COMMAND ----------
 
+step4.explain()
+

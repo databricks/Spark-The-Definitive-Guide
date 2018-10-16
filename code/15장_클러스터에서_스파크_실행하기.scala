@@ -11,12 +11,6 @@ val spark = SparkSession.builder().appName("Databricks Spark Example")
 import org.apache.spark.SparkContext
 val sc = SparkContext.getOrCreate()
 
-
-// COMMAND ----------
-
-step4.explain()
-
-
 // COMMAND ----------
 
 spark.conf.set("spark.sql.shuffle.partitions", 50)
