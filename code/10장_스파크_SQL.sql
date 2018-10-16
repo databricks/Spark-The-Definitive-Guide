@@ -165,7 +165,11 @@ USE some_db
 
 SHOW tables
 
-SELECT * FROM flights -- fails with table/view not found
+
+-- COMMAND ----------
+
+-- 현재 데이터베이스에 flights 테이블이 없기 때문에 오류 발생
+SELECT * FROM flights
 
 
 -- COMMAND ----------
@@ -305,6 +309,7 @@ SHOW FUNCTIONS LIKE "collect*";
 
 -- COMMAND ----------
 
+-- 실행 전, 스칼라 언어를 이용해 power3 메소드를 등록해야 함.
 SELECT count, power3(count) FROM flights
 
 
