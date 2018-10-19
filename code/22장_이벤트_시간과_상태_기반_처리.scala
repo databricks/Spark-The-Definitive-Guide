@@ -42,7 +42,7 @@ spark.sql("SELECT * FROM events_per_window").printSchema()
 
 // 스칼라 버전
 import org.apache.spark.sql.functions.{window, col}
-withEventTime.groupBy(window(col("event_time"), "10 minutes"), "User").count()
+withEventTime.groupBy(window(col("event_time"), "10 minutes"), col("User")).count()
   .writeStream
   .queryName("events_per_window")
   .format("memory")
