@@ -116,14 +116,17 @@ ds1.selectExpr("topic", "CAST(key AS STRING)", "CAST(value AS STRING)")
 ds1.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
   .writeStream.format("kafka")
   .option("kafka.bootstrap.servers", "host1:port1,host2:port2")
-  .option("checkpointLocation", "/to/HDFS-compatible/dir")\
+  .option("checkpointLocation", "/to/HDFS-compatible/dir")
   .option("topic", "topic1")
   .start()
 
 
 // COMMAND ----------
 
-//in Scala
+// 스칼라 버전
+
+import org.apache.spark.sql.ForeachWriter
+
 datasetOfString.write.foreach(new ForeachWriter[String] {
   def open(partitionId: Long, version: Long): Boolean = {
     // open a database connection
@@ -146,7 +149,7 @@ val socketDF = spark.readStream.format("socket")
 
 // COMMAND ----------
 
-activityCounts.format("console").write()
+activityCounts.writeStream.format("console").outputMode("complete").start()
 
 
 // COMMAND ----------
