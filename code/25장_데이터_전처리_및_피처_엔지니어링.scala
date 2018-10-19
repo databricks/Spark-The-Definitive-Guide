@@ -83,7 +83,7 @@ bucketer.transform(contDF).show()
 
 // 스칼라 버전
 import org.apache.spark.ml.feature.QuantileDiscretizer
-val bucketer = new QuantileDiscretizer().setNumBuckets(5).setInputCol("id")
+val bucketer = new QuantileDiscretizer().setNumBuckets(5).setInputCol("id").setOutputCol("result")
 val fittedBucketer = bucketer.fit(contDF)
 fittedBucketer.transform(contDF).show()
 

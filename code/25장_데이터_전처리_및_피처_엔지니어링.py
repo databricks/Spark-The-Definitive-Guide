@@ -54,7 +54,7 @@ bucketer.transform(contDF).show()
 # COMMAND ----------
 
 from pyspark.ml.feature import QuantileDiscretizer
-bucketer = QuantileDiscretizer().setNumBuckets(5).setInputCol("id")
+bucketer = QuantileDiscretizer().setNumBuckets(5).setInputCol("id").setOutputCol("result")
 fittedBucketer = bucketer.fit(contDF)
 fittedBucketer.transform(contDF).show()
 
@@ -192,8 +192,8 @@ stops.transform(tokenized).show()
 from pyspark.ml.feature import NGram
 unigram = NGram().setInputCol("DescOut").setN(1)
 bigram = NGram().setInputCol("DescOut").setN(2)
-unigram.transform(tokenized.select("DescOut")).show(False)
-bigram.transform(tokenized.select("DescOut")).show(False)
+unigram.transform(tokenized.select("DescOut")).show(10, False)
+bigram.transform(tokenized.select("DescOut")).show(10, False)
 
 
 # COMMAND ----------
@@ -206,7 +206,7 @@ cv = CountVectorizer()\
   .setMinTF(1)\
   .setMinDF(2)
 fittedCV = cv.fit(tokenized)
-fittedCV.transform(tokenized).show(False)
+fittedCV.transform(tokenized).show(10, False)
 
 
 # COMMAND ----------
