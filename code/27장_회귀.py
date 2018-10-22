@@ -60,7 +60,7 @@ from pyspark.ml import Pipeline
 from pyspark.ml.tuning import CrossValidator, ParamGridBuilder
 glr = GeneralizedLinearRegression().setFamily("gaussian").setLink("identity")
 pipeline = Pipeline().setStages([glr])
-params = ParamGridBuilder().addGrid(glr.regParam, [0, 0.5, 1]).build()
+params = ParamGridBuilder().addGrid(glr.regParam, [0.0, 0.5, 1.0]).build()
 evaluator = RegressionEvaluator()\
   .setMetricName("rmse")\
   .setPredictionCol("prediction")\

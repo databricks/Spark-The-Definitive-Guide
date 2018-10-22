@@ -6,7 +6,7 @@ val df = spark.read.load("/data/regression")
 
 // 스칼라 버전
 import org.apache.spark.ml.regression.LinearRegression
-val lr = new LinearRegression().setMaxIter(10).setRegParam(0.3)\
+val lr = new LinearRegression().setMaxIter(10).setRegParam(0.3)
   .setElasticNetParam(0.8)
 println(lr.explainParams())
 val lrModel = lr.fit(df)
@@ -69,7 +69,7 @@ val glr = new GeneralizedLinearRegression()
   .setFamily("gaussian")
   .setLink("identity")
 val pipeline = new Pipeline().setStages(Array(glr))
-val params = new ParamGridBuilder().addGrid(glr.regParam, Array(0, 0.5, 1))
+val params = new ParamGridBuilder().addGrid(glr.regParam, Array(0.0, 0.5, 1.0))
   .build()
 val evaluator = new RegressionEvaluator()
   .setMetricName("rmse")
