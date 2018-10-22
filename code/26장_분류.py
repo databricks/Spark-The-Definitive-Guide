@@ -64,7 +64,7 @@ trainedModel = nb.fit(bInput.where("label != 0"))
 # COMMAND ----------
 
 from pyspark.mllib.evaluation import BinaryClassificationMetrics
-out = model.transform(bInput)\
+out = trainedModel.transform(bInput)\
   .select("prediction", "label")\
   .rdd.map(lambda x: (float(x[0]), float(x[1])))
 metrics = BinaryClassificationMetrics(out)
@@ -74,9 +74,6 @@ metrics = BinaryClassificationMetrics(out)
 
 print metrics.areaUnderPR
 print metrics.areaUnderROC
-print "Receiver Operating Characteristic"
-metrics.roc.toDF().show()
-
 
 # COMMAND ----------
 

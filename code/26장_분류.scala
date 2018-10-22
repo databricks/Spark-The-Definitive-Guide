@@ -70,7 +70,7 @@ val trainedModel = nb.fit(bInput.where("label != 0"))
 
 // 스칼라 버전
 import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
-val out = model.transform(bInput)
+val out = trainedModel.transform(bInput)
   .select("prediction", "label")
   .rdd.map(x => (x(0).asInstanceOf[Double], x(1).asInstanceOf[Double]))
 val metrics = new BinaryClassificationMetrics(out)
