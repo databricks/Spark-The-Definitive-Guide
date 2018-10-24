@@ -178,7 +178,7 @@ def color_locator(column, color_string):
           .cast("boolean")\
           .alias("is_" + color_string)
 selectedColumns = [color_locator(df.Description, c) for c in simpleColors]
-selectedColumns.append(expr("*")) # has to a be Column type
+selectedColumns.append(expr("*")) # Column 타입이어야 합니다.
 
 df.select(*selectedColumns).where(expr("is_white OR is_red"))\
   .select("Description").show(3, False)
@@ -283,7 +283,7 @@ df.select(split(col("Description"), " ").alias("array_col"))\
 # COMMAND ----------
 
 from pyspark.sql.functions import size
-df.select(size(split(col("Description"), " "))).show(2) # shows 5 and 3
+df.select(size(split(col("Description"), " "))).show(2) # 5와 3 출력
 
 
 # COMMAND ----------
@@ -377,7 +377,7 @@ udfExampleDF.select(power3udf(col("num"))).show(2)
 # COMMAND ----------
 
 udfExampleDF.selectExpr("power3(num)").show(2)
-# registered in Scala
+# 스칼라로 등록된 UDF 사용
 
 
 # COMMAND ----------
@@ -389,7 +389,7 @@ spark.udf.register("power3py", power3, DoubleType())
 # COMMAND ----------
 
 udfExampleDF.selectExpr("power3py(num)").show(2)
-# registered via Python
+# 파이썬으로 등록된 UDF 사용
 
 
 # COMMAND ----------
