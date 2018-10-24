@@ -13,6 +13,9 @@ tripEdges = tripData\
 
 
 # COMMAND ----------
+# graphframes(https://spark-packages.org/package/graphframes/graphframes) 라이브러리가 필요합니다.
+# http://graphframes.github.io/quick-start.html
+# DataBricks Runtime: https://docs.databricks.com/user-guide/libraries.html#maven-libraries
 
 from graphframes import GraphFrame
 stationGraph = GraphFrame(stationVertices, tripEdges)
