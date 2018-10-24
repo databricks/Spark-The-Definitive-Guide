@@ -59,7 +59,7 @@ KVcharacters.countByKey()
 
 KVcharacters.groupByKey().map(lambda row: (row[0], reduce(addFunc, row[1])))\
   .collect()
-# note this is Python 2, reduce must be imported from functools in Python 3
+# 이 코드는 파이썬2 기준으로 되어 있습니다. 파이썬 3을 사용하는 경우, functools에서 reduce를 임포트 해야 합니다.(역자주: from functools import reduce 구문을 사용합니다.)
 
 
 # COMMAND ----------
