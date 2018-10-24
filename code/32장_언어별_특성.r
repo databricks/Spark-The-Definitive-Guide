@@ -35,7 +35,7 @@ collect(count(groupBy(retail.data, "country")))
 
 # COMMAND ----------
 
-sample(mtcars) # fails
+sample(mtcars) # 오류 발생
 
 
 # COMMAND ----------
@@ -165,12 +165,14 @@ library(sparklyr)
 
 
 # COMMAND ----------
-
+# 데이터브릭스 환경의 경우 다음의 링크를 참조하십시오.
+# https://docs.databricks.com/spark/latest/sparkr/sparklyr.html
 sc <- spark_connect(master = "local")
 
 
 # COMMAND ----------
-
+# 데이터브릭스 환경의 경우 다음의 링크를 참조하십시오.
+# https://docs.databricks.com/spark/latest/sparkr/sparklyr.html
 spark_connect(master = "local", config = spark_config())
 
 
@@ -186,6 +188,10 @@ setShufflePartitions <- dbGetQuery(sc, "SET spark.sql.shuffle.partitions=10")
 
 
 # COMMAND ----------
+
+# https://spark.rstudio.com/reference/spark_write_csv/
+# https://spark.rstudio.com/reference/spark_write_json/
+# https://spark.rstudio.com/reference/spark_write_parquet/
 
 spark_write_csv(tbl_name, location)
 spark_write_json(tbl_name, location)
