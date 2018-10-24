@@ -1,4 +1,4 @@
-# Original loading code that does *not* cache DataFrame
+# DataFrame을 캐싱하지 않는 원본 코드
 DF1 = spark.read.format("csv")\
   .option("inferSchema", "true")\
   .option("header", "true")\
