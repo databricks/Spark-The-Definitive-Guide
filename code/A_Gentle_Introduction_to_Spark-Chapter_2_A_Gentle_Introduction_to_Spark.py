@@ -1,3 +1,8 @@
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("chap2").getOrCreate()
+
+# COMMAND ----------
+
 myRange = spark.range(1000).toDF("number")
 
 
