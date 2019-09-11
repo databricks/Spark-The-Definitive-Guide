@@ -146,7 +146,7 @@ val socketDF = spark.readStream.format("socket")
 
 // COMMAND ----------
 
-activityCounts.format("console").write()
+activityCounts.writeStream.format("console").start()
 
 
 // COMMAND ----------
