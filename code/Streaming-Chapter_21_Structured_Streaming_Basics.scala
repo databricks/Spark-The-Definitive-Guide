@@ -116,7 +116,7 @@ ds1.selectExpr("topic", "CAST(key AS STRING)", "CAST(value AS STRING)")
 ds1.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
   .writeStream.format("kafka")
   .option("kafka.bootstrap.servers", "host1:port1,host2:port2")
-  .option("checkpointLocation", "/to/HDFS-compatible/dir")\
+  .option("checkpointLocation", "/to/HDFS-compatible/dir")
   .option("topic", "topic1")
   .start()
 
