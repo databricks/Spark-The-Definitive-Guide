@@ -9,7 +9,7 @@ streaming = spark\
 
 # COMMAND ----------
 
-withEventTime = streaming\.selectExpr(
+withEventTime = streaming.selectExpr(
   "*",
   "cast(cast(Creation_Time as double)/1000000000 as timestamp) as event_time")
 
