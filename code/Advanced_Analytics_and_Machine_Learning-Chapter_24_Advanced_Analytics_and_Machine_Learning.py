@@ -38,12 +38,17 @@ lr = LogisticRegression(labelCol="label",featuresCol="features")
 
 # COMMAND ----------
 
-print lr.explainParams()
+print(lr.explainParams())
 
 
 # COMMAND ----------
 
 fittedLR = lr.fit(train)
+
+
+# COMMAND ----------
+
+fittedLR.transform(train).select("label","prediction").show()
 
 
 # COMMAND ----------
@@ -98,6 +103,11 @@ tvs = TrainValidationSplit()\
 # COMMAND ----------
 
 tvsFitted = tvs.fit(train)
+
+
+# COMMAND ----------
+
+evaluator.evaluate(tvsFitted.transform(test))
 
 
 # COMMAND ----------
