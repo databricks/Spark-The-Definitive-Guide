@@ -63,7 +63,7 @@ GROUP BY DEST_COUNTRY_NAME
 """)
 
 val dataFrameWay = flightData2015
-  .groupBy('DEST_COUNTRY_NAME)
+  .groupBy("DEST_COUNTRY_NAME")
   .count()
 
 sqlWay.explain
