@@ -331,7 +331,7 @@ jsonDF = spark.range(1).selectExpr("""
 from pyspark.sql.functions import get_json_object, json_tuple
 
 jsonDF.select(
-    get_json_object(col("jsonString"), "$.myJSONKey.myJSONValue[1]") as "column",
+    get_json_object(col("jsonString"), "$.myJSONKey.myJSONValue[1]").alias("column"),
     json_tuple(col("jsonString"), "myJSONKey")).show(2)
 
 
