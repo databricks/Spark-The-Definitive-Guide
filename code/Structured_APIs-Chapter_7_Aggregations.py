@@ -179,3 +179,6 @@ pivoted = dfWithDate.groupBy("date").pivot("Country").sum()
 
 # COMMAND ----------
 
+pivoted.where("date > '2011-12-05'")\
+  .select("date", "`USA_sum(CAST(Quantity AS BIGINT))`")\
+  .show()
