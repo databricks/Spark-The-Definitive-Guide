@@ -38,8 +38,8 @@ p_model = p.fit(train_df)
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 tested_df = p_model.transform(test_df)
 evaluator = MulticlassClassificationEvaluator(metricName="accuracy")
-print(("Test set accuracy = " + str(evaluator.evaluate(tested_df.select(
-  "prediction", "label")))))
+print("Test set accuracy = " + str(evaluator.evaluate(tested_df.select(
+  "prediction", "label"))))
 
 
 # COMMAND ----------

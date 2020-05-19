@@ -252,7 +252,7 @@ model = word2Vec.fit(documentDF)
 result = model.transform(documentDF)
 for row in result.collect():
     text, vector = row
-    print(("Text: [%s] => \nVector: %s\n" % (", ".join(text), str(vector))))
+    print("Text: [%s] => \nVector: %s\n" % (", ".join(text), str(vector)))
 
 
 # COMMAND ----------
