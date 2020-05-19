@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 if __name__ == '__main__':
     from pyspark.sql import SparkSession
     spark = SparkSession.builder \

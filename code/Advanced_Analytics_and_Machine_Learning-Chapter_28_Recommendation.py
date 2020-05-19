@@ -15,7 +15,7 @@ als = ALS()\
   .setUserCol("userId")\
   .setItemCol("movieId")\
   .setRatingCol("rating")
-print als.explainParams()
+print(als.explainParams())
 alsModel = als.fit(training)
 predictions = alsModel.transform(test)
 
@@ -36,7 +36,7 @@ evaluator = RegressionEvaluator()\
   .setLabelCol("rating")\
   .setPredictionCol("prediction")
 rmse = evaluator.evaluate(predictions)
-print("Root-mean-square error = %f" % rmse)
+print(("Root-mean-square error = %f" % rmse))
 
 
 # COMMAND ----------

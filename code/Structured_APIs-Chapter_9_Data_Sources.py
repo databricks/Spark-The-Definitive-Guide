@@ -112,8 +112,8 @@ spark.read.jdbc(url, tablename, predicates=predicates, properties=props).count()
 # COMMAND ----------
 
 colName = "count"
-lowerBound = 0L
-upperBound = 348113L # this is the max count in our database
+lowerBound = 0
+upperBound = 348113 # this is the max count in our database
 numPartitions = 10
 
 

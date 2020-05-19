@@ -18,14 +18,14 @@ sales.cache()
 
 from pyspark.ml.clustering import KMeans
 km = KMeans().setK(5)
-print km.explainParams()
+print(km.explainParams())
 kmModel = km.fit(sales)
 
 
 # COMMAND ----------
 
 summary = kmModel.summary
-print summary.clusterSizes # number of points
+print(summary.clusterSizes) # number of points
 kmModel.computeCost(sales)
 centers = kmModel.clusterCenters()
 print("Cluster Centers: ")
@@ -43,7 +43,7 @@ bkmModel = bkm.fit(sales)
 # COMMAND ----------
 
 summary = bkmModel.summary
-print summary.clusterSizes # number of points
+print(summary.clusterSizes) # number of points
 kmModel.computeCost(sales)
 centers = kmModel.clusterCenters()
 print("Cluster Centers: ")
@@ -55,14 +55,14 @@ for center in centers:
 
 from pyspark.ml.clustering import GaussianMixture
 gmm = GaussianMixture().setK(5)
-print gmm.explainParams()
+print(gmm.explainParams())
 model = gmm.fit(sales)
 
 
 # COMMAND ----------
 
 summary = model.summary
-print model.weights
+print(model.weights)
 model.gaussiansDF.show()
 summary.cluster.show()
 summary.clusterSizes
@@ -89,7 +89,7 @@ prepped = cvFitted.transform(tokenized)
 
 from pyspark.ml.clustering import LDA
 lda = LDA().setK(10).setMaxIter(5)
-print lda.explainParams()
+print(lda.explainParams())
 model = lda.fit(prepped)
 
 

@@ -128,7 +128,7 @@ transformedTraining = fittedPipeline.transform(trainDataFrame)
 from pyspark.ml.clustering import KMeans
 kmeans = KMeans()\
   .setK(20)\
-  .setSeed(1L)
+  .setSeed(1)
 
 
 # COMMAND ----------
