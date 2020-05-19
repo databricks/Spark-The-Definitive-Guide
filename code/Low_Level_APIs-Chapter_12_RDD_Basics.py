@@ -62,7 +62,7 @@ fiftyFiftySplit = words.randomSplit([0.5, 0.5])
 
 # COMMAND ----------
 
-spark.sparkContext.parallelize(list(range(1, 21))).reduce(lambda x, y: x + y) # 210
+spark.sparkContext.parallelize(range(1, 21)).reduce(lambda x, y: x + y) # 210
 
 
 # COMMAND ----------

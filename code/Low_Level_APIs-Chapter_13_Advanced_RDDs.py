@@ -25,17 +25,16 @@ keyword.flatMapValues(lambda word: word.upper()).collect()
 
 # COMMAND ----------
 
-list(keyword.keys()).collect()
-list(keyword.values()).collect()
+keyword.keys().collect()
+keyword.values().collect()
 
 
 # COMMAND ----------
 
 import random
-from functools import reduce
 distinctChars = words.flatMap(lambda word: list(word.lower())).distinct()\
   .collect()
-sampleMap = dict([(c, random.random()) for c in distinctChars])
+sampleMap = dict(map(lambda c: (c, random.random()), distinctChars))
 words.map(lambda word: (word.lower()[0], word))\
   .sampleByKey(True, sampleMap, 6).collect()
 
@@ -48,7 +47,7 @@ def maxFunc(left, right):
   return max(left, right)
 def addFunc(left, right):
   return left + right
-nums = sc.parallelize(list(range(1,31)), 5)
+nums = sc.parallelize(range(1,31), 5)
 
 
 # COMMAND ----------
@@ -122,7 +121,7 @@ KVcharacters.join(keyedChars, outputPartitions).count()
 
 # COMMAND ----------
 
-numRange = sc.parallelize(list(range(10)), 2)
+numRange = sc.parallelize(range(10), 2)
 words.zip(numRange).collect()
 
 
