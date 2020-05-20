@@ -15,7 +15,7 @@ als = ALS()\
   .setUserCol("userId")\
   .setItemCol("movieId")\
   .setRatingCol("rating")
-print als.explainParams()
+print(als.explainParams())
 alsModel = als.fit(training)
 predictions = alsModel.transform(test)
 

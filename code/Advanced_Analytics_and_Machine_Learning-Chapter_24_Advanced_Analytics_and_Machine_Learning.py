@@ -38,7 +38,7 @@ lr = LogisticRegression(labelCol="label",featuresCol="features")
 
 # COMMAND ----------
 
-print lr.explainParams()
+print(lr.explainParams())
 
 
 # COMMAND ----------

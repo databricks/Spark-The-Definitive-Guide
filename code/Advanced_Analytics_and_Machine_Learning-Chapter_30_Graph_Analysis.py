@@ -21,9 +21,9 @@ stationGraph.cache()
 
 # COMMAND ----------
 
-print "Total Number of Stations: " + str(stationGraph.vertices.count())
-print "Total Number of Trips in Graph: " + str(stationGraph.edges.count())
-print "Total Number of Trips in Original Data: " + str(tripData.count())
+print("Total Number of Stations: " + str(stationGraph.vertices.count()))
+print("Total Number of Trips in Graph: " + str(stationGraph.edges.count()))
+print("Total Number of Trips in Original Data: " + str(tripData.count()))
 
 
 # COMMAND ----------

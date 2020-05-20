@@ -6,20 +6,20 @@ bInput = spark.read.format("parquet").load("/data/binary-classification")\
 
 from pyspark.ml.classification import LogisticRegression
 lr = LogisticRegression()
-print lr.explainParams() # see all parameters
+print(lr.explainParams()) # see all parameters
 lrModel = lr.fit(bInput)
 
 
 # COMMAND ----------
 
-print lrModel.coefficients
-print lrModel.intercept
+print(lrModel.coefficients)
+print(lrModel.intercept)
 
 
 # COMMAND ----------
 
 summary = lrModel.summary
-print summary.areaUnderROC
+print(summary.areaUnderROC)
 summary.roc.show()
 summary.pr.show()
 
@@ -33,7 +33,7 @@ summary.objectiveHistory
 
 from pyspark.ml.classification import DecisionTreeClassifier
 dt = DecisionTreeClassifier()
-print dt.explainParams()
+print(dt.explainParams())
 dtModel = dt.fit(bInput)
 
 
@@ -41,7 +41,7 @@ dtModel = dt.fit(bInput)
 
 from pyspark.ml.classification import RandomForestClassifier
 rfClassifier = RandomForestClassifier()
-print rfClassifier.explainParams()
+print(rfClassifier.explainParams())
 trainedModel = rfClassifier.fit(bInput)
 
 
@@ -49,7 +49,7 @@ trainedModel = rfClassifier.fit(bInput)
 
 from pyspark.ml.classification import GBTClassifier
 gbtClassifier = GBTClassifier()
-print gbtClassifier.explainParams()
+print(gbtClassifier.explainParams())
 trainedModel = gbtClassifier.fit(bInput)
 
 
@@ -57,7 +57,7 @@ trainedModel = gbtClassifier.fit(bInput)
 
 from pyspark.ml.classification import NaiveBayes
 nb = NaiveBayes()
-print nb.explainParams()
+print(nb.explainParams())
 trainedModel = nb.fit(bInput.where("label != 0"))
 
 
@@ -72,9 +72,9 @@ metrics = BinaryClassificationMetrics(out)
 
 # COMMAND ----------
 
-print metrics.areaUnderPR
-print metrics.areaUnderROC
-print "Receiver Operating Characteristic"
+print(metrics.areaUnderPR)
+print(metrics.areaUnderROC)
+print("Receiver Operating Characteristic")
 metrics.roc.toDF().show()
 
 
