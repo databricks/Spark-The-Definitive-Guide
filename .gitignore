@@ -1,2 +1,8 @@
 .DS_Store
 *.DS_Store
+
+# virtualenv
+.python-version
+
+# jupyter
+.ipynb_checkpoints/
