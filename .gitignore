@@ -6,3 +6,7 @@
 
 # jupyter
 .ipynb_checkpoints/
+
+# Spark logs
+code/derby.log
+code/metastore_db/
